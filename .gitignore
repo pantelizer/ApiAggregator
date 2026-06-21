@@ -1,0 +1,19 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+
+# User-specific secrets are stored outside the repo by dotnet user-secrets,
+# but never commit a real appsettings with secrets:
+appsettings.*.local.json
+
+# Test results
+[Tt]est[Rr]esults/
+*.trx
+coverage*.xml

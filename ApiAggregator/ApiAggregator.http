@@ -1,0 +1,39 @@
+@ApiAggregator_HostAddress = http://localhost:5183
+
+### 1. Get a JWT token (any non-empty credentials are accepted in this demo)
+# @name login
+POST {{ApiAggregator_HostAddress}}/api/auth/token
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "pw"
+}
+
+### Capture the token from the login response above
+@token = {{login.response.body.accessToken}}
+
+### 2. Aggregated data from all sources (parallel fetch)
+GET {{ApiAggregator_HostAddress}}/api/aggregation?city=Berlin&keyword=dotnet
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 3. Aggregation with filtering + sorting (GitHub only, by relevance desc)
+GET {{ApiAggregator_HostAddress}}/api/aggregation?keyword=ai&sources=GitHub&sortBy=Relevance&sortDir=Descending
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 4. Aggregation filtered by category and date range
+GET {{ApiAggregator_HostAddress}}/api/aggregation?keyword=ai&category=news&fromDate=2024-01-01&sortBy=Date&sortDir=Descending
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 5. All request statistics
+GET {{ApiAggregator_HostAddress}}/api/statistics
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 6. Statistics for a single API
+GET {{ApiAggregator_HostAddress}}/api/statistics/GitHub
+Authorization: Bearer {{token}}
+Accept: application/json
