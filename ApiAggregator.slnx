@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ApiAggregator/ApiAggregator.csproj" />
+  <Project Path="ApiAggregator.Tests/ApiAggregator.Tests.csproj" />
+</Solution>
